@@ -1,12 +1,20 @@
-# vp_eventrole_automator
-(*FIXME: In one or two paragraphs, describe what the extension does and why one would download it. *)
+# Volunteer Portal Event Role Automator (vp_eventrole_automator)
 
-This is an [extension for CiviCRM](https://docs.civicrm.org/sysadmin/en/latest/customize/extensions/), licensed under [AGPL-3.0](LICENSE.txt).
+This extension improves the experience when creating Volunteer Event Role activities by automatically calculating and creating registration start and end date custom fields.
+
 
 ## Getting Started
 
-(* FIXME: Where would a new user navigate to get started? What changes would they see? *)
+1. Create a new activity of Volunteer Event Role activity type
 
-## Known Issues
+2. Fill in the activity date time field, Registration Start Days Before, and Registration End Days Before custom fields. 
+**Note:** Based on the activity date, count how many days before that date you would want the registration to start and end.
 
-(* FIXME *)
+3. This extension uses a hook to find the activity created. It then retrieves the activity date time, Registration Start Days Before, and Registration End Days Before fields.
+
+4. Next, it performs a calculation for the registration start & end dates:
+
+**Registration Start Date** = activity date time - Registration Start Days Before
+**Registration End Date** = activity date time - Registration End Days Before
+
+5. After calculation, the extension will send an update activity API4 request for the newly created activity to populate the registration start & end date custom fields.
